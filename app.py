@@ -4,7 +4,7 @@ import smtplib
 from email.mime.text import MIMEText
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources = {r"/*": {"origins": "*"}})
 
 def sendmail(data):
     work = data.get('work')
@@ -14,7 +14,7 @@ def sendmail(data):
     if not message:
         message = default_message
     message_string = f"Work: {work}\nRoom No: {room_no}\nMessage: {message}"
-    print("Message String:", message_string)  # Chec
+    print("Message String:", message_string)  
 
     # Check if work and room_no are provided
     if not all([work, room_no]):
@@ -39,7 +39,6 @@ def sendmail(data):
         return {'success': False, 'message': 'An unexpected error occurred.', 'error': str(e)}, 500
 
 @app.route('/sendmail', methods=['POST'])
-@cross_origin()
 def handle_sendmail():
     if request.method == 'POST':
         data = request.json
