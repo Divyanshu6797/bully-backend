@@ -4,7 +4,7 @@ import smtplib
 from email.mime.text import MIMEText
 
 app = Flask(__name__)
-CORS(app, resources = {r"/*": {"origins": "*"}})
+CORS(app, resources = {r"/*": {"origins": ["http://localhost:3000/"]}})
 
 def sendmail(data):
     work = data.get('work')
