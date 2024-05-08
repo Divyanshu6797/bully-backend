@@ -30,7 +30,7 @@ def sendmail(data):
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
         server.login("zero686797@gmail.com", 'wcvy ntpm jiwd pjyq')
-        server.sendmail("zero686797@gmail.com", "divyanshu6797@gmail.com",msg.as_string())
+        server.sendmail("zero686797@gmail.com", "anu.rag.gade007@gmail.com",msg.as_string())
         server.quit()
         return {'success': True, 'message': 'Email sent successfully.'}
     except smtplib.SMTPException as e:
