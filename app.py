@@ -4,7 +4,7 @@ import smtplib
 from email.mime.text import MIMEText
 
 app = Flask(__name__)
-CORS(app,origins = "*", supports_credentials=True)
+CORS(app, origins='*', methods=['GET', 'POST', 'PUT', 'DELETE'], allow_headers=['Content-Type', 'Authorization'])
 
 def sendmail(data):
     work = data.get('work')
