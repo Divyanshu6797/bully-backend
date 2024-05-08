@@ -6,15 +6,6 @@ from email.mime.text import MIMEText
 app = Flask(__name__)
 CORS(app)
 
-api = Api(app)
-
-@app.after_request
-def after_request(response):
-  response.headers.add('Access-Control-Allow-Origin', '*')
-  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-  return response
-
 def sendmail(data):
     work = data.get('work')
     room_no = data.get('room_no')
@@ -48,6 +39,7 @@ def sendmail(data):
         return {'success': False, 'message': 'An unexpected error occurred.', 'error': str(e)}, 500
 
 @app.route('/sendmail', methods=['POST'])
+@crossdomain(origin='*')
 def handle_sendmail():
     if request.method == 'POST':
         data = request.json
