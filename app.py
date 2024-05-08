@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS, crossdomain
+from flask_cors import CORS
 import smtplib
 from email.mime.text import MIMEText
 
@@ -39,7 +39,7 @@ def sendmail(data):
         return {'success': False, 'message': 'An unexpected error occurred.', 'error': str(e)}, 500
 
 @app.route('/sendmail', methods=['POST'])
-@crossdomain(origin='*')
+@cross_origin()
 def handle_sendmail():
     if request.method == 'POST':
         data = request.json
