@@ -4,7 +4,7 @@ import smtplib
 from email.mime.text import MIMEText
 
 app = Flask(__name__)
-CORS(app,"origins" = "https://bully-frontend.vercel.app")
+CORS(app,origins = "https://bully-frontend.vercel.app")
 
 def sendmail(data):
     work = data.get('work')
