@@ -40,10 +40,19 @@ def sendmail(data):
 
 @app.route('/sendmail', methods=['POST'])
 def handle_sendmail():
-    if request.method == 'POST':
+    if request.method == 'OPTIONS':
+        # Handle preflight request
+        response = jsonify({'success': True})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+        response.headers.add('Access-Control-Allow-Methods', 'POST')
+        return response
+    elif request.method == 'POST':
         data = request.json
         result, status_code = sendmail(data)
-        return jsonify(result), status_code
+        response = jsonify(result)
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response, status_code
     else:
         return jsonify({'success': False, 'message': 'Only POST requests are allowed.'}), 405
 
